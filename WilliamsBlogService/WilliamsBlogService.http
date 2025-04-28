@@ -1,0 +1,17 @@
+@WilliamsBlogService_HostAddress = https://localhost:44323
+
+GET {{WilliamsBlogService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+POST {{WilliamsBlogService_HostAddress}}/api/blogs/create
+Content-Type: application/json
+
+{
+  "blogId": "1",
+  "url": "testing",
+  "posts": []
+}
+
+###

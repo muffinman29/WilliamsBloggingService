@@ -1,0 +1,90 @@
+﻿using Data.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Business
+{
+    public class Blog
+    {
+        private readonly BloggingContext db = new BloggingContext();
+
+        public Blog()
+        {
+            
+        }
+
+        public async Task<Data.Models.Blog> GetBlog(int blogId) 
+        {
+            try
+            {
+                return await db.Blogs.FindAsync(blogId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Data.Models.Blog>> GetAllBlogs() 
+        {
+            var allBlogs = new List<Data.Models.Blog>();
+           
+            try
+            {
+                allBlogs = await db.Blogs.ToListAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return allBlogs;
+        }
+
+        public async Task<string> DeleteBlog(Data.Models.Blog blog)
+        {
+            try
+            {
+                db.Remove(blog);
+                await db.SaveChangesAsync();
+                return "success";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<string> UpdateBlog(Data.Models.Blog blog)
+        {
+            try
+            {
+                db.Update(blog);
+                await db.SaveChangesAsync();
+                return "success";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<string> CreateBlog(Data.Models.Blog blog)
+        {
+            try
+            {
+                db.Add(blog);
+                await db.SaveChangesAsync();
+                return "success";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+}
