@@ -1,10 +1,5 @@
 @WilliamsBlogService_HostAddress = https://localhost:44323
 
-GET {{WilliamsBlogService_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
-
 POST {{WilliamsBlogService_HostAddress}}/api/blogs/create
 Content-Type: application/json
 
@@ -12,6 +7,67 @@ Content-Type: application/json
   "blogId": "1",
   "url": "testing",
   "posts": []
+}
+
+###
+
+POST {{WilliamsBlogService_HostAddress}}/api/users/authenticate
+Content-Type: application/json
+
+{
+  "userId": "1",
+  "firstname": "steven",
+  "lastname": "williams",
+  "username": "muffinman",
+  "password": "test"
+}
+
+###
+
+POST {{WilliamsBlogService_HostAddress}}/api/Blogs
+Content-Type: application/json
+
+{
+  "blogId": "10",
+  "url": "test.com",
+  "user": {
+    "userId": "2",
+    "firstname": "steven",
+    "lastname": "williams",
+    "username": "muffinman",
+    "password": "?"
+  }
+}
+
+###
+
+POST {{WilliamsBlogService_HostAddress}}/api/users/register
+Content-Type: application/json
+
+{
+  "userId": "2",
+  "firstname": "steven",
+  "lastname": "williams",
+  "username": "muffinman",
+  "password": "test"
+}
+
+###
+
+
+@username=muffinman
+POST {{WilliamsBlogService_HostAddress}}/api/users/authenticate/{{username}}
+Content-Type: application/json
+
+"test"
+
+###
+
+POST {{WilliamsBlogService_HostAddress}}/api/users/authenticate
+Content-Type: application/json
+
+{
+  //User
 }
 
 ###

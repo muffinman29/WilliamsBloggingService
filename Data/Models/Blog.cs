@@ -11,5 +11,8 @@ namespace Data.Models
         public int BlogId { get; set; }
         public required string Url { get; set; }
         public List<Post> Posts { get; } = [];
+
+        public int UserId { get; set; }
+        public required User User { get; set; }
     }
 }

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WilliamsBlogService
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BlogsController : ControllerBase
@@ -17,8 +19,8 @@ namespace WilliamsBlogService
         {
             try
             {
-                var Blog = new Business.Blog();
-                return await Blog.GetAllBlogs();
+                var blogInstance = new Business.Blog();
+                return await blogInstance.GetAllBlogs();
             }
             catch (Exception)
             {
@@ -31,8 +33,8 @@ namespace WilliamsBlogService
         {
             try
             {
-                var Blog = new Business.Blog();
-                return await Blog.GetBlog(id);
+                var blogInstance = new Business.Blog();
+                return await blogInstance.GetBlog(id);
             }
             catch (Exception)
             {
@@ -45,8 +47,8 @@ namespace WilliamsBlogService
         {
             try
             {
-                var BlogInstance = new Business.Blog();
-                await BlogInstance.CreateBlog(Blog);
+                var blogInstance = new Business.Blog();
+                await blogInstance.CreateBlog(Blog);
                 return "success";
             }
             catch (Exception)
@@ -60,8 +62,8 @@ namespace WilliamsBlogService
         {
             try
             {
-                var BlogInstance = new Business.Blog();
-                await BlogInstance.UpdateBlog(Blog);
+                var blogInstance = new Business.Blog();
+                await blogInstance.UpdateBlog(Blog);
                 return "success";
             }
             catch (Exception)
