@@ -1,10 +1,5 @@
 ﻿using Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business
 {
@@ -12,11 +7,19 @@ namespace Business
     {
         private readonly BloggingContext db = new BloggingContext();
 
-        public async Task<Data.Models.User> AuthenticateUser(string username, string password)
+        public async Task<bool> AuthenticateUser(string username, string password)
         {
             try
             {
-                return await db.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
+                var user = await db.Users.FirstAsync(x => x.Username == username);
+                var hash = BCrypt.Net.BCrypt.HashPassword(password);
+                if (BCrypt.Net.BCrypt.Verify(password, user.Password)) {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
@@ -69,6 +72,9 @@ namespace Business
         {
             try
             {
+                //var salt = BCrypt.Net.BCrypt.GenerateSalt();
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                user.Password = hashedPassword;
                 db.Add(user);
                 await db.SaveChangesAsync();
                 return "success";

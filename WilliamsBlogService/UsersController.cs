@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,13 +24,13 @@ namespace WilliamsBlogService
         }
 
         [HttpPost("register")]
-        public async Task<string> RegisterUser(Data.Models.User User)
+        public async Task<IActionResult> RegisterUser(Data.Models.User user)
         {
             try
             {
                 var userInstance = new Business.User();
-                await userInstance.CreateUser(User);
-                return "success";
+                await userInstance.CreateUser(user);
+                return Ok(new { Message = "success" });
             }
             catch (Exception)
             {
@@ -60,20 +61,6 @@ namespace WilliamsBlogService
                 var userInstance = new Business.User();
                 await userInstance.DeleteUser(id);
                 return "success";
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        [HttpPost("authenticate")]
-        public async Task<Data.Models.User> Authenticate([FromBody]Data.Models.User currentUser)
-        {
-            try
-            {
-                var userInstance = new Business.User();
-                return await userInstance.AuthenticateUser(currentUser.Username, currentUser.Password);
             }
             catch (Exception)
             {

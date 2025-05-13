@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WilliamsBlogService
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BlogsController : ControllerBase
