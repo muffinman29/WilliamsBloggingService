@@ -71,7 +71,8 @@ namespace Business
             }
         }
 
-        public async Task<List<Data.Models.Post>> GetAllPosts(int blogId) {
+        public async Task<List<Data.Models.Post>> GetPostsByBlogId(int blogId)
+        {
             var allPosts = new List<Data.Models.Post>();
             try
             {

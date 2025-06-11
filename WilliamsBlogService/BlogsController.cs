@@ -20,7 +20,7 @@ namespace WilliamsBlogService
             try
             {
                 var blogInstance = new Business.Blog();
-                return await blogInstance.GetAllBlogs();
+                return await blogInstance.GetBlogs();
             }
             catch (Exception)
             {
@@ -29,15 +29,29 @@ namespace WilliamsBlogService
         }
 
         [HttpGet("{id}")]
-        public async Task<Data.Models.Blog> GetBlog(int id)
+        public async Task<Data.Models.Blog> GetBlogById(int id)
         {
             try
             {
                 var blogInstance = new Business.Blog();
-                return await blogInstance.GetBlog(id);
+                return await blogInstance.GetBlogById(id);
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        [HttpGet("user/{id}")]
+        public async Task<List<Data.Models.Blog>> GetBlogsByUserId(int id) {
+            try
+            {
+                var blogInstance = new Business.Blog();
+                return await blogInstance.GetBlogByUserId(id);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
@@ -72,6 +86,7 @@ namespace WilliamsBlogService
             }
         }
 
+        [HttpDelete]
         public async Task<string> DeleteBlog(Data.Models.Blog blog)
         {
             try

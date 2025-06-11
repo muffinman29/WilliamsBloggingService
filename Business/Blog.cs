@@ -17,7 +17,7 @@ namespace Business
             
         }
 
-        public async Task<Data.Models.Blog> GetBlog(int blogId) 
+        public async Task<Data.Models.Blog> GetBlogById(int blogId) 
         {
             try
             {
@@ -29,20 +29,16 @@ namespace Business
             }
         }
 
-        public async Task<List<Data.Models.Blog>> GetAllBlogs() 
-        {
-            var allBlogs = new List<Data.Models.Blog>();
-           
+        public async Task<List<Data.Models.Blog>> GetBlogs() 
+        {  
             try
             {
-                allBlogs = await db.Blogs.ToListAsync();
+                return await db.Blogs.ToListAsync();
             }
             catch (Exception)
             {
                 throw;
             }
-
-            return allBlogs;
         }
 
         public async Task<string> DeleteBlog(Data.Models.Blog blog)
@@ -83,6 +79,19 @@ namespace Business
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public async Task<List<Data.Models.Blog>> GetBlogByUserId(int id)
+        {
+            try
+            {
+                return await db.Blogs.Where(x => x.UserId == id).ToListAsync();
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

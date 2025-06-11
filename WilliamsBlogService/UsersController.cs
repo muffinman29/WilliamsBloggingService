@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -64,6 +67,22 @@ namespace WilliamsBlogService
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        [HttpGet("token")]
+        public async Task<Data.Models.User> GetUserFromToken() {
+            try
+            {
+                var accessToken = await HttpContext.GetTokenAsync(JwtBearerDefaults.AuthenticationScheme, "access_token");
+                var user = new Business.User();
+                var userTask = user.GetUserFromToken(accessToken ?? "");
+                return userTask;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

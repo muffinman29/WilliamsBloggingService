@@ -1,5 +1,10 @@
 ﻿using Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Business
 {
@@ -21,7 +26,7 @@ namespace Business
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -33,7 +38,7 @@ namespace Business
             {
                 return await db.Users.FirstOrDefaultAsync(x => x.UserId == id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -83,6 +88,24 @@ namespace Business
             {
                 throw;
             }
+        }
+
+        public Data.Models.User? GetUserFromToken(string token)
+        {
+            if (!string.IsNullOrEmpty(token)) {
+                var jwtHandler = new JwtSecurityTokenHandler();
+                var readableToken = jwtHandler.CanReadToken(token);
+
+                if (readableToken) {
+                    var t = jwtHandler.ReadJwtToken(token);
+                    var claims = t.Claims;
+                    var username = claims.Where(x => x.Type == "sub").Select(x => x.Value).FirstOrDefault();
+                    return db.Users.FirstOrDefault(x => x.Username == username);
+                    
+                }
+            }
+
+            return null;
         }
     }
 }

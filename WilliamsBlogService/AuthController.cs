@@ -16,8 +16,6 @@ namespace WilliamsBlogService
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {
-            // For demo, hard-coded user. Replace with real auth check.
-            //var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
             var user = new Business.User();
             if (await user.AuthenticateUser(request.Username, request.Password))
             {
@@ -26,7 +24,7 @@ namespace WilliamsBlogService
             }
 
             return Unauthorized();
-        }
+        }        
     }
 
     public class LoginRequest

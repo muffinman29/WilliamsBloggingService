@@ -9,13 +9,14 @@ namespace WilliamsBlogService
     public class PostsController : ControllerBase
     {
         public PostsController() { }
-
-        [HttpGet("all/{blogId}")]
-        public async Task<List<Data.Models.Post>> GetAllPosts(int blogId) {
+       
+        [HttpGet("{id}")]
+        public async Task<Data.Models.Post> GetPostById(int id)
+        {
             try
             {
                 var post = new Business.Post();
-                return await post.GetAllPosts(blogId);
+                return await post.GetPost(id);
             }
             catch (Exception)
             {
@@ -23,13 +24,13 @@ namespace WilliamsBlogService
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<Data.Models.Post> GetPost(int id)
+        [HttpGet("blog/{id}")]
+        public async Task<List<Data.Models.Post>> GetPostsByBlogId(int id)
         {
             try
             {
                 var post = new Business.Post();
-                return await post.GetPost(id);
+                return await post.GetPostsByBlogId(id);
             }
             catch (Exception)
             {

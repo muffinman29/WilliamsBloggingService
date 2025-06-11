@@ -10,9 +10,11 @@ namespace Data.Models
     {
         public int BlogId { get; set; }
         public required string Url { get; set; }
+        public required string Title { get; set; }
+        public required string Description { get; set; }
+        public required string Author { get; set; }
         public List<Post> Posts { get; } = [];
 
         public int UserId { get; set; }
-        public required User User { get; set; }
     }
 }
