@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Business
 {
-    public class Post
+    public class Post : IPost
     {
         private readonly BloggingContext db = new BloggingContext();
 

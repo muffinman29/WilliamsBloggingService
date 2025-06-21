@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Business;
 
 namespace WilliamsBlogService
 {
@@ -9,18 +10,18 @@ namespace WilliamsBlogService
     [ApiController]
     public class BlogsController : ControllerBase
     {
-        public BlogsController()
+        IBlog Blog { get; set; }
+        public BlogsController(IBlog blog)
         {
-            
+            Blog = blog;
         }
 
         [HttpGet("all")]
         public async Task<List<Data.Models.Blog>> GetAllBlogs()
         {
             try
-            {
-                var blogInstance = new Business.Blog();
-                return await blogInstance.GetBlogs();
+            {                
+                return await Blog.GetBlogs();
             }
             catch (Exception)
             {
@@ -33,8 +34,7 @@ namespace WilliamsBlogService
         {
             try
             {
-                var blogInstance = new Business.Blog();
-                return await blogInstance.GetBlogById(id);
+                return await Blog.GetBlogById(id);
             }
             catch (Exception)
             {
@@ -46,8 +46,7 @@ namespace WilliamsBlogService
         public async Task<List<Data.Models.Blog>> GetBlogsByUserId(int id) {
             try
             {
-                var blogInstance = new Business.Blog();
-                return await blogInstance.GetBlogByUserId(id);
+                return await Blog.GetBlogByUserId(id);
             }
             catch (Exception)
             {
@@ -57,13 +56,12 @@ namespace WilliamsBlogService
         }
 
         [HttpPost("create")]
-        public async Task<string> CreateBlog(Data.Models.Blog Blog)
+        public async Task<IActionResult> CreateBlog(Data.Models.Blog blog)
         {
             try
             {
-                var blogInstance = new Business.Blog();
-                await blogInstance.CreateBlog(Blog);
-                return "success";
+                await Blog.CreateBlog(blog);
+                return Ok(new { Message = "success" });
             }
             catch (Exception)
             {
@@ -72,12 +70,11 @@ namespace WilliamsBlogService
         }
 
         [HttpPut]
-        public async Task<string> UpdateBlog(Data.Models.Blog Blog)
+        public async Task<string> UpdateBlog(Data.Models.Blog blog)
         {
             try
             {
-                var blogInstance = new Business.Blog();
-                await blogInstance.UpdateBlog(Blog);
+                await Blog.UpdateBlog(blog);
                 return "success";
             }
             catch (Exception)
@@ -91,8 +88,7 @@ namespace WilliamsBlogService
         {
             try
             {
-                var blogInstance = new Business.Blog();
-                await blogInstance.DeleteBlog(blog);
+                await Blog.DeleteBlog(blog);
                 return "success";
             }
             catch (Exception)

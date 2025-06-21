@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business
 {
-    public class Blog
+    public class Blog : IBlog
     {
         private readonly BloggingContext db = new BloggingContext();
 

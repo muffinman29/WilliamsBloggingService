@@ -1,22 +1,27 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Business;
 
 namespace WilliamsBlogService
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
     {
-        public PostsController() { }
+        public IPost Post { get; set; }
+        public PostsController(IPost post)
+        {
+            Post = post;
+        }
        
         [HttpGet("{id}")]
         public async Task<Data.Models.Post> GetPostById(int id)
         {
             try
-            {
-                var post = new Business.Post();
-                return await post.GetPost(id);
+            {                
+                return await Post.GetPost(id);
             }
             catch (Exception)
             {
@@ -29,8 +34,7 @@ namespace WilliamsBlogService
         {
             try
             {
-                var post = new Business.Post();
-                return await post.GetPostsByBlogId(id);
+                return await Post.GetPostsByBlogId(id);
             }
             catch (Exception)
             {
@@ -42,8 +46,7 @@ namespace WilliamsBlogService
         public async Task<string> CreatePost(Data.Models.Post post) {
             try
             {
-                var postInstance = new Business.Post();
-                await postInstance.CreatePost(post);
+                await Post.CreatePost(post);
                 return "success";
             }
             catch (Exception)
@@ -56,8 +59,7 @@ namespace WilliamsBlogService
         public async Task<string> UpdatePost(Data.Models.Post post) {
             try
             {
-                var postInstance = new Business.Post();
-                await postInstance.UpdatePost(post);
+                await Post.UpdatePost(post);
                 return "success";
             }
             catch (Exception)
@@ -70,8 +72,7 @@ namespace WilliamsBlogService
         public async Task<string> DeletePost(Data.Models.Post post) {
             try
             {
-                var postInstance = new Business.Post();
-                await postInstance.DeletePost(post);
+                await Post.DeletePost(post);
                 return "success";
             }
             catch (Exception)
