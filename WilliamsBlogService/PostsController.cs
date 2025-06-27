@@ -4,8 +4,7 @@ using Microsoft.Extensions.Options;
 using Business;
 
 namespace WilliamsBlogService
-{
-    [Authorize]
+{    
     [Route("api/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
@@ -29,12 +28,12 @@ namespace WilliamsBlogService
             }
         }
 
-        [HttpGet("blog/{id}")]
-        public async Task<List<Data.Models.Post>> GetPostsByBlogId(int id)
+        [HttpGet("blog/{blogId}")]
+        public async Task<List<Data.Models.Post>> GetPostsByBlogId(int blogId)
         {
             try
             {
-                return await Post.GetPostsByBlogId(id);
+                return await Post.GetPostsByBlogId(blogId);
             }
             catch (Exception)
             {
@@ -42,12 +41,12 @@ namespace WilliamsBlogService
             }
         }
 
-        [HttpPost]
-        public async Task<string> CreatePost(Data.Models.Post post) {
+        [HttpPost("create")]
+        public async Task<IActionResult> CreatePost(Data.Models.Post post) {
             try
             {
                 await Post.CreatePost(post);
-                return "success";
+                return Ok(new { Message = "success" });
             }
             catch (Exception)
             {
@@ -56,11 +55,11 @@ namespace WilliamsBlogService
         }
 
         [HttpPost]
-        public async Task<string> UpdatePost(Data.Models.Post post) {
+        public async Task<IActionResult> UpdatePost(Data.Models.Post post) {
             try
             {
                 await Post.UpdatePost(post);
-                return "success";
+                return Ok(new { Message = "success" });
             }
             catch (Exception)
             {
@@ -69,11 +68,11 @@ namespace WilliamsBlogService
         }
 
         [HttpDelete]
-        public async Task<string> DeletePost(Data.Models.Post post) {
+        public async Task<IActionResult> DeletePost(Data.Models.Post post) {
             try
             {
                 await Post.DeletePost(post);
-                return "success";
+                return Ok(new { Message = "success" });
             }
             catch (Exception)
             {

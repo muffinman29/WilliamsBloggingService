@@ -15,6 +15,5 @@ namespace Data.Models
         public DateTime UpdatedDate { get; set; }
 
         public int BlogId { get; set; }
-        public required Blog Blog { get; set; }
     }
 }
