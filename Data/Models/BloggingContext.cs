@@ -12,6 +12,7 @@ namespace Data.Models
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public string DbPath { get; }
 
         public BloggingContext()
@@ -34,5 +35,18 @@ namespace Data.Models
                     context.SaveChanges();
                 }
             });
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Comment>()
+                .HasOne(b => b.Blog)
+                .WithMany(a => a.Comments)
+                .HasForeignKey(b => b.BlogId);
+
+            modelBuilder.Entity<Blog>()
+                .HasOne(b => b.User)
+                .WithMany(a => a.Blogs)
+                .HasForeignKey(b => b.UserId);
+        }
     }
 }

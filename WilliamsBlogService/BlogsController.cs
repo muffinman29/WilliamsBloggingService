@@ -13,7 +13,7 @@ namespace WilliamsBlogService
         IBlog Blog { get; set; }
         public BlogsController(IBlog blog)
         {
-            Blog = blog;
+            Blog = blog;            
         }
 
         [HttpGet("all")]

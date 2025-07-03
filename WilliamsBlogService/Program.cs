@@ -17,6 +17,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton<JwtTokenService>();
 builder.Services.AddTransient<IBlog, Blog>();
 builder.Services.AddTransient<IPost, Post>();
+builder.Services.AddTransient<IComment, Comment>();
 
 
 builder.Services.AddCors(options =>

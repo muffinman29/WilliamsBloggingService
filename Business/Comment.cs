@@ -3,49 +3,20 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Business
 {
-    public class Blog : ExtendedBlog, IBlog
+    public class Comment : IComment
     {
         private readonly BloggingContext db = new BloggingContext();
-
-        public Blog()
-        {
-            
-        }
-
-        public async Task<Data.Models.Blog> GetBlogById(int blogId) 
+        public async Task<string> CreateComment(Data.Models.Comment comment)
         {
             try
             {
-                return await db.Blogs.FindAsync(blogId);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<List<Data.Models.Blog>> GetBlogs() 
-        {  
-            try
-            {
-                return await db.Blogs.ToListAsync();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<string> DeleteBlog(Data.Models.Blog blog)
-        {
-            try
-            {
-                db.Remove(blog);
+                db.Add(comment);
                 await db.SaveChangesAsync();
                 return "success";
             }
@@ -55,11 +26,11 @@ namespace Business
             }
         }
 
-        public async Task<string> UpdateBlog(Data.Models.Blog blog)
+        public async Task<string> DeleteComment(Data.Models.Comment comment)
         {
             try
             {
-                db.Update(blog);
+                db.Remove(comment);
                 await db.SaveChangesAsync();
                 return "success";
             }
@@ -69,13 +40,11 @@ namespace Business
             }
         }
 
-        public async Task<string> CreateBlog(Data.Models.Blog blog)
+        public async Task<Data.Models.Comment> GetCommentById(int commentId)
         {
             try
             {
-                db.Add(blog);
-                await db.SaveChangesAsync();
-                return "success";
+                return await db.Comments.FindAsync(commentId);
             }
             catch (Exception)
             {
@@ -83,15 +52,41 @@ namespace Business
             }
         }
 
-        public async Task<List<Data.Models.Blog>> GetBlogByUserId(int id)
+        public async Task<List<Data.Models.Comment>> GetComments()
         {
             try
             {
-                return await db.Blogs.Where(x => x.UserId == id).ToListAsync();
+                return await db.Comments.ToListAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Data.Models.Comment>> GetCommentsByBlogId(int id)
+        {
+            try
+            {
+                return await db.Comments.Where(x => x.BlogId == id).ToListAsync();
             }
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public async Task<string> UpdateComment(Data.Models.Comment comment)
+        {
+            try
+            {
+                db.Update(comment);
+                await db.SaveChangesAsync();
+                return "success";
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
