@@ -17,7 +17,7 @@ namespace WilliamsBlogService
              Comment = comment;
         }
         
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<List<Data.Models.Comment>> GetComments()
         {
             try
@@ -78,7 +78,7 @@ namespace WilliamsBlogService
         }
 
         // PUT api/<CommentsController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<string> UpdateComment([FromBody] Data.Models.Comment comment)
         {
             try
@@ -94,7 +94,7 @@ namespace WilliamsBlogService
         }
 
         // DELETE api/<CommentsController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<string> DeleteComment(Data.Models.Comment comment)
         {
             try
