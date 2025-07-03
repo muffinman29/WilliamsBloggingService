@@ -9,6 +9,7 @@ namespace Business
 
         public Blog()
         {
+
         }
 
         public async Task<Data.Models.Blog> GetBlogById(int blogId)
