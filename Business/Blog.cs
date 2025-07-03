@@ -1,10 +1,5 @@
 ﻿using Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business
 {
@@ -14,10 +9,10 @@ namespace Business
 
         public Blog()
         {
-            
+
         }
 
-        public async Task<Data.Models.Blog> GetBlogById(int blogId) 
+        public async Task<Data.Models.Blog> GetBlogById(int blogId)
         {
             try
             {
@@ -29,8 +24,8 @@ namespace Business
             }
         }
 
-        public async Task<List<Data.Models.Blog>> GetBlogs() 
-        {  
+        public async Task<List<Data.Models.Blog>> GetBlogs()
+        {
             try
             {
                 return await db.Blogs.ToListAsync();

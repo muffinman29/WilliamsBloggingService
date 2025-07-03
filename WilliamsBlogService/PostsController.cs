@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Business;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Business;
 
 namespace WilliamsBlogService
-{    
+{
     [Route("api/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
@@ -14,12 +12,12 @@ namespace WilliamsBlogService
         {
             Post = post;
         }
-       
+
         [HttpGet("{id}")]
         public async Task<Data.Models.Post> GetPostById(int id)
         {
             try
-            {                
+            {
                 return await Post.GetPost(id);
             }
             catch (Exception)
@@ -42,7 +40,8 @@ namespace WilliamsBlogService
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreatePost(Data.Models.Post post) {
+        public async Task<IActionResult> CreatePost(Data.Models.Post post)
+        {
             try
             {
                 await Post.CreatePost(post);
@@ -55,7 +54,8 @@ namespace WilliamsBlogService
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdatePost(Data.Models.Post post) {
+        public async Task<IActionResult> UpdatePost(Data.Models.Post post)
+        {
             try
             {
                 await Post.UpdatePost(post);
@@ -68,7 +68,8 @@ namespace WilliamsBlogService
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeletePost(Data.Models.Post post) {
+        public async Task<IActionResult> DeletePost(Data.Models.Post post)
+        {
             try
             {
                 await Post.DeletePost(post);

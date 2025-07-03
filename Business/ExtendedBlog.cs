@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Business
+﻿namespace Business
 {
     public class ExtendedBlog
     {
-        public string Foo() {
+        public string Foo()
+        {
             return "";
         }
     }

@@ -70,7 +70,8 @@ namespace WilliamsBlogService
         }
 
         [HttpGet("token")]
-        public async Task<Data.Models.User> GetUserFromToken() {
+        public async Task<Data.Models.User> GetUserFromToken()
+        {
             try
             {
                 var accessToken = await HttpContext.GetTokenAsync(JwtBearerDefaults.AuthenticationScheme, "access_token");

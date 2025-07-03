@@ -36,13 +36,14 @@ namespace WilliamsBlogService
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public static void GetTokenFromHeader(string token) {
-            
-            
+        public static void GetTokenFromHeader(string token)
+        {
+
+
 
         }
 
-        
+
     }
 
 }

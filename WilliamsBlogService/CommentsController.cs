@@ -14,9 +14,9 @@ namespace WilliamsBlogService
         IComment Comment { get; set; }
         public CommentsController(IComment comment)
         {
-             Comment = comment;
+            Comment = comment;
         }
-        
+
         [HttpGet("all")]
         public async Task<List<Data.Models.Comment>> GetComments()
         {

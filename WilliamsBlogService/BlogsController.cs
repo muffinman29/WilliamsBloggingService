@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Business;
 
 namespace WilliamsBlogService
 {
@@ -13,14 +12,14 @@ namespace WilliamsBlogService
         IBlog Blog { get; set; }
         public BlogsController(IBlog blog)
         {
-            Blog = blog;            
+            Blog = blog;
         }
 
         [HttpGet("all")]
         public async Task<List<Data.Models.Blog>> GetAllBlogs()
         {
             try
-            {                
+            {
                 return await Blog.GetBlogs();
             }
             catch (Exception)
@@ -43,7 +42,8 @@ namespace WilliamsBlogService
         }
 
         [HttpGet("user/{id}")]
-        public async Task<List<Data.Models.Blog>> GetBlogsByUserId(int id) {
+        public async Task<List<Data.Models.Blog>> GetBlogsByUserId(int id)
+        {
             try
             {
                 return await Blog.GetBlogByUserId(id);
