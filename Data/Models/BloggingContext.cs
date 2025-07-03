@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Models
 {
@@ -31,7 +26,7 @@ namespace Data.Models
                 var testUser = context.Set<User>().FirstOrDefault(u => u.Username == "muffinman");
                 if (testUser == null)
                 {
-                    context.Set<User>().Add(new User { UserId = 1, FirstName = "Steven", LastName = "Williams", Username = "muffinman", Password = "test" });
+                    context.Set<User>().Add(new User { UserId = 1, FirstName = "Steven", LastName = "Williams", Username = "muffinman", Password = "test", Blogs = [] });
                     context.SaveChanges();
                 }
             });

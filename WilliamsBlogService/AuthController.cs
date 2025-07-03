@@ -24,7 +24,7 @@ namespace WilliamsBlogService
             }
 
             return Unauthorized();
-        }        
+        }
     }
 
     public class LoginRequest

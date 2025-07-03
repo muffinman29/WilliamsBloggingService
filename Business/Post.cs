@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data;
-using Data.Models;
+﻿using Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Business
@@ -15,7 +9,7 @@ namespace Business
 
         public Post()
         {
-            
+
         }
 
         public async Task<Data.Models.Post> GetPost(int postId)
@@ -30,7 +24,8 @@ namespace Business
             }
         }
 
-        public async Task<string> DeletePost(Data.Models.Post post) {
+        public async Task<string> DeletePost(Data.Models.Post post)
+        {
             try
             {
                 db.Remove(post);
