@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Business
 {
-    public class Blog : ExtendedBlog, IBlog
+    public class Blog : IBlog
     {
         private readonly BloggingContext db = new BloggingContext();
 
