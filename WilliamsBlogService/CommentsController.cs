@@ -72,7 +72,6 @@ namespace WilliamsBlogService
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

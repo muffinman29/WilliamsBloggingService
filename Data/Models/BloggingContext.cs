@@ -26,22 +26,22 @@ namespace Data.Models
                 var testUser = context.Set<User>().FirstOrDefault(u => u.Username == "muffinman");
                 if (testUser == null)
                 {
-                    context.Set<User>().Add(new User { UserId = 1, FirstName = "Steven", LastName = "Williams", Username = "muffinman", Password = "test", Blogs = [] });
+                    context.Set<User>().Add(new User { UserId = 1, FirstName = "Steven", LastName = "Williams", Username = "muffinman", Password = "test" });
                     context.SaveChanges();
                 }
             });
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comment>()
-                .HasOne(b => b.Blog)
-                .WithMany(a => a.Comments)
-                .HasForeignKey(b => b.BlogId);
+            //modelBuilder.Entity<Comment>()
+            //    .HasOne(b => b.Blog)
+            //    .WithMany(a => a.Comments)
+            //    .HasForeignKey(b => b.BlogId);
 
-            modelBuilder.Entity<Blog>()
-                .HasOne(b => b.User)
-                .WithMany(a => a.Blogs)
-                .HasForeignKey(b => b.UserId);
+            //modelBuilder.Entity<Blog>()
+            //    .HasOne(b => b.User)
+            //    .WithMany(a => a.Blogs)
+            //    .HasForeignKey(b => b.UserId);
         }
     }
 }

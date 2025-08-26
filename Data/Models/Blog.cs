@@ -13,7 +13,5 @@ namespace Data.Models
 
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public required User User { get; set; }
-        public required ICollection<Comment> Comments { get; set; }
     }
 }
